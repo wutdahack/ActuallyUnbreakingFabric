@@ -19,5 +19,5 @@ public class UnbreakingEnchantmentMixin {
         }
         return true;
     }
-    
+
 }
