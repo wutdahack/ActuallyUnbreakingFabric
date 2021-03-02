@@ -3,7 +3,9 @@ package wutdahack.actuallyunbreaking.mixin;
 import net.minecraft.enchantment.UnbreakingEnchantment;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;
 
@@ -11,13 +13,13 @@ import java.util.Random;
 public class UnbreakingEnchantmentMixin {
 
     // when preventing damage, sets the tool to be actually unbreakable
-    @Overwrite
-    // thanks to overwrite now it doesn't take 1 durability away and then add it back on - overwrite should be avoided but it worked better than inject??
-    public static boolean shouldPreventDamage(ItemStack item, int level, Random random) {
+    @Inject(method = "shouldPreventDamage", cancellable = true, at = @At(value = "TAIL"))
+    // (learnt my lesson and i'm not using overwrite ever again lol)
+    private static void preventDamage(ItemStack item, int level, Random random, CallbackInfoReturnable<Boolean> cir) {
         if (item.isDamageable() || item.isDamaged()) {
-            item.setDamage(-2147483648);
+            item.setDamage(-2147483648); // setting the item to be unbreakable with this ridiculous negative number
         }
-        return true;
+        cir.setReturnValue(true); // this did the same thing overwrite did! :D
     }
 
 }
