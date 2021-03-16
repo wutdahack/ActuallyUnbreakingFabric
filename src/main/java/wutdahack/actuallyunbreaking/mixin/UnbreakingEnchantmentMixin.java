@@ -12,6 +12,14 @@ import java.util.Random;
 @Mixin(UnbreakingEnchantment.class)
 public class UnbreakingEnchantmentMixin {
 
+   // changes the level of the unbreaking enchantment
+   @Inject(method = "getMaxLevel", cancellable = true, at = @At(value = "TAIL"))
+    private void changeMaxLevel(CallbackInfoReturnable<Integer> cir) {
+        cir.setReturnValue(1); // setting the max level to be 1, so now there will only be 1 level of unbreaking and 1 book of the enchantment
+       // items with unbreaking 2 and up will still be in the inventory and will work like usual :D
+    }
+
+
     // when preventing damage, sets the tool to be actually unbreakable
     @Inject(method = "shouldPreventDamage", cancellable = true, at = @At(value = "TAIL"))
     // (learnt my lesson and i'm not using overwrite ever again lol)
