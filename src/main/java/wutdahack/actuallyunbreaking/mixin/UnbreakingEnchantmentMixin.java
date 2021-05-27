@@ -9,6 +9,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Random;
 
+// i don't know if this class is still needed :/
+
 @Mixin(UnbreakingEnchantment.class)
 public class UnbreakingEnchantmentMixin {
 

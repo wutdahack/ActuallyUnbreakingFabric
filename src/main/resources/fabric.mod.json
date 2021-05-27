@@ -3,8 +3,15 @@
   "id": "actuallyunbreaking",
   "version": "${version}",
   "name": "Actually Unbreaking",
-  "description": "",
-  "authors": [],
+  "description": "a mixin that changes the unbreaking enchantment to actually make the item unbreakable.",
+  "authors": [
+    "wutdahack"
+  ],
+  "entrypoints": {
+    "main": [
+      "wutdahack.actuallyunbreaking.ActuallyUnbreaking"
+    ]
+  },
   "contact": {},
   "license": "MIT",
   "icon": "assets/actuallyunbreaking/icon.png",

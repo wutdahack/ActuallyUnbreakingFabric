@@ -4,6 +4,7 @@
   "package": "wutdahack.actuallyunbreaking.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ItemStackMixin",
     "UnbreakingEnchantmentMixin"
   ],
   "client": [
