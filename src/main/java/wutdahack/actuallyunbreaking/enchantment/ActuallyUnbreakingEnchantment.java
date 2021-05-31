@@ -2,6 +2,7 @@ package wutdahack.actuallyunbreaking.enchantment;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
+import net.minecraft.enchantment.MendingEnchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -28,6 +29,11 @@ public class ActuallyUnbreakingEnchantment extends Enchantment {
 
     public boolean isAcceptableItem(ItemStack stack) {
         return stack.isDamageable() || super.isAcceptableItem(stack);
+    }
+
+    // items can't have mending and unbreaking together
+    public boolean canAccept(Enchantment other) {
+        return !(other instanceof MendingEnchantment) && super.canAccept(other);
     }
 
 
