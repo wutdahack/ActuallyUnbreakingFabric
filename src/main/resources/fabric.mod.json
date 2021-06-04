@@ -8,6 +8,9 @@
     "wutdahack"
   ],
   "entrypoints": {
+    "modmenu": [
+      "wutdahack.actuallyunbreaking.AUModMenuIntegration"
+    ],
     "main": [
       "wutdahack.actuallyunbreaking.ActuallyUnbreaking"
     ]

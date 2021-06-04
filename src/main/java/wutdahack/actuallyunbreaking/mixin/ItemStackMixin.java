@@ -1,7 +1,6 @@
 package wutdahack.actuallyunbreaking.mixin;
 
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
@@ -10,13 +9,13 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import wutdahack.actuallyunbreaking.enchantment.ActuallyUnbreakingEnchantment;
 import wutdahack.actuallyunbreaking.enchantment.ModEnchantments;
 
 import java.util.Random;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
-
 
     @Shadow public abstract void setDamage(int damage);
 
@@ -25,8 +24,10 @@ public abstract class ItemStackMixin {
         // preventing damage if item has the enchantment
         int i = EnchantmentHelper.getLevel(ModEnchantments.UNBREAKING, (ItemStack) (Object) this);
         if (i > 0) {
+          if (ActuallyUnbreakingEnchantment.preventDamage((ItemStack) (Object) this, random)) {
             setDamage(-2147483648); // setting items that didn't have unbreaking before and lost durability have full durability
             cir.setReturnValue(false); // making sure that it doesn't attempt to damage
+          }
         }
     }
 }

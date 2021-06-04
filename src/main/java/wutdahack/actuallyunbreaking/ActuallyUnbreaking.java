@@ -1,10 +1,8 @@
 package wutdahack.actuallyunbreaking;
 
-import com.mojang.serialization.Lifecycle;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.SimpleRegistry;
 import wutdahack.actuallyunbreaking.enchantment.ModEnchantments;
 
 public class ActuallyUnbreaking implements ModInitializer {
@@ -12,6 +10,9 @@ public class ActuallyUnbreaking implements ModInitializer {
     @Override
     public void onInitialize() {
 
+        // registering config
+        AutoConfig.register(AUConfig.class, JanksonConfigSerializer::new);
+        // registering enchantments
         ModEnchantments.registerEnchantments();
 
     }
