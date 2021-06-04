@@ -2,9 +2,7 @@ package wutdahack.actuallyunbreaking.enchantment;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.enchantment.*;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import wutdahack.actuallyunbreaking.AUConfig;
 
