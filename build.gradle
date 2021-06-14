@@ -19,6 +19,7 @@ repositories {
 
     maven { url "https://maven.shedaniel.me/" }
     maven { url "https://maven.terraformersmc.com/releases/" }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -37,6 +38,7 @@ dependencies {
         }
 
         modImplementation "com.terraformersmc:modmenu:${project.mod_menu_version}"
+        modImplementation "com.github.AmyMialee:no-enchantment-cap:main-SNAPSHOT"
 
         modImplementation ("me.sargunvohra.mcmods:autoconfig1u:${project.auto_config_version}") {
             exclude(group: "net.fabricmc.fabric-api")
