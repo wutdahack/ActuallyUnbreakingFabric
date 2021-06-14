@@ -1,6 +1,8 @@
 package wutdahack.actuallyunbreaking.enchantment;
 
+import amymialee.noenchantcap.NoEnchantCap;
 import me.shedaniel.autoconfig.AutoConfig;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.enchantment.*;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -26,9 +28,13 @@ public class ActuallyUnbreakingEnchantment extends Enchantment {
     }
 
     public int getMaxLevel() {
-        if (config.level3Only) {
-            return 3;
-        } else if (!config.level3Only) {
+        if (config.maxLevelOnly) {
+            if (FabricLoader.getInstance().isModLoaded("noenchantcap")) {
+                return NoEnchantCap.config.unbreakingCap;
+            } else {
+                return 3;
+            }
+        } else if (!config.maxLevelOnly) {
             return 1;
         }
         return 1;
@@ -47,19 +53,27 @@ public class ActuallyUnbreakingEnchantment extends Enchantment {
 
         int level = EnchantmentHelper.getLevel(ModEnchantments.UNBREAKING, stack);
 
-        if (config.level3Only) {
-            if (level == 3) {
-                return true;
-            } else if (level < 3) {
-                UnbreakingEnchantment.shouldPreventDamage(stack, level, random);
+        if (config.maxLevelOnly) {
+            if (FabricLoader.getInstance().isModLoaded("noenchantcap")) {
+                if (level == NoEnchantCap.config.unbreakingCap) {
+                    return true;
+                } else if (level < NoEnchantCap.config.unbreakingCap) {
+                    UnbreakingEnchantment.shouldPreventDamage(stack, level, random);
+                }
+            } else {
+                if (level == 3) {
+                    return true;
+                } else if (level < 3) {
+                    UnbreakingEnchantment.shouldPreventDamage(stack, level, random);
+                }
             }
-
-        }  else if (!config.level3Only && level > 0) {
+        }  else if (!config.maxLevelOnly && level > 0) {
             return true;
         }
 
         return false;
     }
+
 
 
 }
