@@ -49,23 +49,27 @@ public class ActuallyUnbreakingEnchantment extends Enchantment {
         return !(other instanceof MendingEnchantment) && super.canAccept(other);
     }
 
-    public static boolean preventDamage(ItemStack stack, Random random) {
+    public static boolean preventDamage(ItemStack stack) {
 
         int level = EnchantmentHelper.getLevel(ModEnchantments.UNBREAKING, stack);
 
         if (config.maxLevelOnly) {
+           /* maybe this is not needed?
             if (FabricLoader.getInstance().isModLoaded("noenchantcap")) {
-                if (level == NoEnchantCap.config.unbreakingCap) {
+                if (level == NoEnchantCap.config.unbreakingCap || level == ModEnchantments.UNBREAKING.getMaxLevel() * 2) {
                     return true;
                 } else if (level < NoEnchantCap.config.unbreakingCap) {
-                    UnbreakingEnchantment.shouldPreventDamage(stack, level, random);
+                   // UnbreakingEnchantment.shouldPreventDamage(stack, level, random);
+                    return false;
                 }
-            } else {
-                if (level == 3) {
+            }
+           */
+
+                if (level == ModEnchantments.UNBREAKING.getMaxLevel() || level == ModEnchantments.UNBREAKING.getMaxLevel() * 2) {
                     return true;
-                } else if (level < 3) {
-                    UnbreakingEnchantment.shouldPreventDamage(stack, level, random);
-                }
+                } else if (level < ModEnchantments.UNBREAKING.getMaxLevel()) {
+                    // UnbreakingEnchantment.shouldPreventDamage(stack, level, random);
+                    return false;
             }
         }  else if (!config.maxLevelOnly && level > 0) {
             return true;
