@@ -1,6 +1,7 @@
 package wutdahack.actuallyunbreaking.mixin;
 
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.UnbreakingEnchantment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
@@ -24,10 +25,26 @@ public abstract class ItemStackMixin {
         // preventing damage if item has the enchantment
         int i = EnchantmentHelper.getLevel(ModEnchantments.UNBREAKING, (ItemStack) (Object) this);
         if (i > 0) {
-          if (ActuallyUnbreakingEnchantment.preventDamage((ItemStack) (Object) this, random)) {
-            setDamage(-2147483648); // setting items that didn't have unbreaking before and lost durability have full durability
-            cir.setReturnValue(false); // making sure that it doesn't attempt to damage
-          }
+            if (ActuallyUnbreakingEnchantment.preventDamage((ItemStack) (Object) this)) {
+                setDamage(-2147483648); // setting items that didn't have unbreaking before and lost durability have full durability
+                cir.setReturnValue(false); // making sure that it doesn't attempt to damage
+                // if preventDamage is false then use the normal ItemStack's behaviour
+            } else if (!ActuallyUnbreakingEnchantment.preventDamage((ItemStack) (Object) this)) {
+                if (amount > 0) {
+                    int j = 0;
+
+                    for (int k = 0; k < amount; ++k) {
+                        if (UnbreakingEnchantment.shouldPreventDamage((ItemStack) (Object) this, i, random)) {
+                            ++j;
+                        }
+                    }
+
+                    amount -= j;
+                    if (amount <= 0) {
+                        cir.setReturnValue(false);
+                    }
+                }
+            }
         }
     }
 }
