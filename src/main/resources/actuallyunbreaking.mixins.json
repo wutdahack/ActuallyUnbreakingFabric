@@ -4,9 +4,9 @@
   "package": "wutdahack.actuallyunbreaking.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-      "UnbreakingEnchantmentMixin"
+    "UnbreakingEnchantmentMixin"
   ],
   "injectors": {
-      "defaultRequire": 1
+    "defaultRequire": 1
   }
 }
