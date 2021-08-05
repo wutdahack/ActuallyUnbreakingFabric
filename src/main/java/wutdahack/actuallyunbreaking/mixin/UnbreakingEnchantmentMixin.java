@@ -5,6 +5,7 @@ import java.util.Random;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.enchantment.MendingEnchantment;
 import net.minecraft.enchantment.UnbreakingEnchantment;
 import net.minecraft.entity.EquipmentSlot;
@@ -14,7 +15,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import wutdahack.actuallyunbreaking.AUConfig;
-import wutdahack.actuallyunbreaking.ActuallyUnbreaking;
 
 @Mixin(UnbreakingEnchantment.class)
 abstract class UnbreakingEnchantmentMixin extends Enchantment {
@@ -38,7 +38,8 @@ abstract class UnbreakingEnchantmentMixin extends Enchantment {
 
     @Inject(method = "shouldPreventDamage", at = @At("HEAD"), cancellable = true)
     private static void makeUnbreakable(ItemStack item, int level, Random random, CallbackInfoReturnable<Boolean> ret) {
-        if (ActuallyUnbreaking.isUnbreakable(level)) {
+        if (AUConfig.instance.maxLevelOnly ? level >= Enchantments.UNBREAKING.getMaxLevel() : level > 0) {
+            item.setDamage(0);
             ret.setReturnValue(true);
         }
     }
