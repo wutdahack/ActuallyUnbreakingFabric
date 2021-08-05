@@ -10,7 +10,7 @@ public class ActuallyUnbreaking implements ModInitializer {
     public void onInitialize() {
 
         // registering config
-        AutoConfig.register(AUConfig.class, JanksonConfigSerializer::new);
+        AUConfig.instance = AutoConfig.register(AUConfig.class, JanksonConfigSerializer::new).get();
 
     }
 }
