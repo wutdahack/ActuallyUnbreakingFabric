@@ -9,6 +9,9 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 @Config.Gui.Background("minecraft:textures/block/dirt.png")
 public class AUConfig implements ConfigData {
 
+    @ConfigEntry.Gui.Excluded
+    public static transient AUConfig instance;
+
     @ConfigEntry.Gui.RequiresRestart(value = false)
     @Comment("only last level of unbreaking will set the tool\nto be unbreakable if this is true. default = false")
     public boolean maxLevelOnly = false;
