@@ -25,7 +25,11 @@ public abstract class UnbreakingEnchantmentMixin extends Enchantment {
     // items can't have mending and unbreaking together
     @Override
     protected boolean canAccept(Enchantment other) {
-        return !(other instanceof MendingEnchantment) && super.canAccept(other);
+        if (AUConfig.instance.mendingIncompatibility) {
+            return !(other instanceof MendingEnchantment) && super.canAccept(other);
+        } else {
+            return super.canAccept(other);
+        }
     }
 
 
