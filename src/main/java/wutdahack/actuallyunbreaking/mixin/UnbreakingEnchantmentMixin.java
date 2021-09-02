@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import wutdahack.actuallyunbreaking.AUConfig;
+import wutdahack.actuallyunbreaking.ActuallyUnbreaking;
 
 @Mixin(UnbreakingEnchantment.class)
 public abstract class UnbreakingEnchantmentMixin extends Enchantment {
@@ -21,25 +21,21 @@ public abstract class UnbreakingEnchantmentMixin extends Enchantment {
         super(weight, type, slotTypes);
     }
 
-    // items can't have mending and unbreaking together
+    // items can't have mending and unbreaking together if enabled in the config
     @Override
     protected boolean canAccept(Enchantment other) {
-        if (AUConfig.instance.mendingIncompatibility) {
+        if (ActuallyUnbreaking.getInstance().config.mendingIncompatibility) {
             return !(other instanceof MendingEnchantment) && super.canAccept(other);
         } else {
             return super.canAccept(other);
         }
     }
 
-
-
     @Inject(method = "shouldPreventDamage", at = @At(value = "HEAD"), cancellable = true)
     private static void makeUnbreakable(ItemStack item, int level, Random random, CallbackInfoReturnable<Boolean> cir) {
-        if (AUConfig.instance.maxLevelOnly ? level >= Enchantments.UNBREAKING.getMaxLevel() : level > 0) {
+        if (ActuallyUnbreaking.getInstance().config.maxLevelOnly ? level >= Enchantments.UNBREAKING.getMaxLevel() : level > 0) {
             item.setDamage(0);
             cir.setReturnValue(true);
         }
     }
-
-
 }
