@@ -9,7 +9,7 @@
   ],
   "entrypoints": {
     "modmenu": [
-      "wutdahack.actuallyunbreaking.AUModMenuIntegration"
+      "wutdahack.actuallyunbreaking.config.AUModMenuIntegration"
     ],
     "main": [
       "wutdahack.actuallyunbreaking.ActuallyUnbreaking"
@@ -24,7 +24,6 @@
   ],
   "depends": {
     "fabricloader": ">=0.11.2",
-    "minecraft": ">=1.16.4",
-    "cloth-config2": ">=4.11.26"
+    "minecraft": ">=1.16.4"
   }
 }
