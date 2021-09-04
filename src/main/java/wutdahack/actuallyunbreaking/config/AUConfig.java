@@ -1,8 +1,6 @@
 package wutdahack.actuallyunbreaking.config;
 
-import me.shedaniel.autoconfig.ConfigData;
-
-public class AUConfig implements ConfigData {
+public class AUConfig {
 
     public boolean maxLevelOnly = false;
 
