@@ -8,14 +8,10 @@
     "wutdahack"
   ],
   "entrypoints": {
-    "modmenu": [
-      "wutdahack.actuallyunbreaking.config.AUModMenuIntegration"
-    ],
     "main": [
       "wutdahack.actuallyunbreaking.ActuallyUnbreaking"
     ]
   },
-  "contact": {},
   "license": "MIT",
   "icon": "assets/actuallyunbreaking/icon.png",
   "environment": "*",
@@ -23,8 +19,8 @@
     "actuallyunbreaking.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.11.2",
-    "minecraft": "1.17.x",
+    "fabricloader": ">=0.12.0",
+    "minecraft": "1.18-alpha.21.44.a",
     "java": ">=16"
   }
 }

@@ -6,11 +6,12 @@ public class AUConfig {
 
     public boolean mendingIncompatibility = true;
 
-    public void setMaxLevelOnly(boolean maxLevelOnly) {
+   /* public void setMaxLevelOnly(boolean maxLevelOnly) {
       this.maxLevelOnly = maxLevelOnly;
     }
 
     public void setMendingIncompatibility(boolean mendingIncompatibility) {
       this.mendingIncompatibility = mendingIncompatibility;
     }
+    */
 }
