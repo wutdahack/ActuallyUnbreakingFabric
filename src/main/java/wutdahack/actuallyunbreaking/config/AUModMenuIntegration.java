@@ -1,22 +1,19 @@
 package wutdahack.actuallyunbreaking.config;
 
-//import com.terraformersmc.modmenu.api.ConfigScreenFactory;
-//import com.terraformersmc.modmenu.api.ModMenuApi;
+import com.terraformersmc.modmenu.api.ConfigScreenFactory;
+import com.terraformersmc.modmenu.api.ModMenuApi;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-//import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.MinecraftClient;
 
 @Environment(EnvType.CLIENT)
-public class AUModMenuIntegration //implements ModMenuApi
-{
-/*
+public class AUModMenuIntegration implements ModMenuApi  {
+
     AUConfigGUI configGUI = new AUConfigGUI();
 
-    // generating a config gui if modmenu is installed
-      commented for now because there's no cloth config for 21w44a
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return parent -> configGUI.getConfigScreen(parent, MinecraftClient.getInstance().world != null);
     }
-*/
+
 }

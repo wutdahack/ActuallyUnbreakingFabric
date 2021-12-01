@@ -1,5 +1,5 @@
 package wutdahack.actuallyunbreaking.config;
-/*
+
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
@@ -8,9 +8,9 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import wutdahack.actuallyunbreaking.ActuallyUnbreaking;
-*/
+
 public class AUConfigGUI {
-/*
+
     AUConfig config = ActuallyUnbreaking.getInstance().config;
 
     public Screen getConfigScreen(Screen parent, boolean isTransparent) {
@@ -41,5 +41,5 @@ public class AUConfigGUI {
         return builder.setTransparentBackground(isTransparent).build();
 
     }
-*/
+
 }
