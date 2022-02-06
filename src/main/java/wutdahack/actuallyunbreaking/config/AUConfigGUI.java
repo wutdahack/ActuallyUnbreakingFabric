@@ -22,22 +22,30 @@ public class AUConfigGUI {
 
         general.addEntry(
                 configEntryBuilder
-                        .startBooleanToggle(new TranslatableText("text.config.actuallyunbreaking.option.maxLevelOnly"), config.maxLevelOnly)
-                        .setDefaultValue(false)
-                        .setSaveConsumer(newValue -> config.setMaxLevelOnly(newValue))
-                        .setTooltip(Text.of("only the last level of unbreaking will set the tool\nto be unbreakable if this is true. default = false"))
-                        .build()
+                    .startBooleanToggle(new TranslatableText("text.config.actuallyunbreaking.option.maxLevelOnly"), config.maxLevelOnly)
+                    .setDefaultValue(false)
+                    .setSaveConsumer(newValue -> config.setMaxLevelOnly(newValue))
+                    .setTooltip(Text.of("only the last level of unbreaking will set the tool\nto be unbreakable if this is true. default = false"))
+                    .build()
         );
 
         general.addEntry(
                 configEntryBuilder
-                        .startBooleanToggle(new TranslatableText("text.config.actuallyunbreaking.option.mendingIncompatibility"), config.mendingIncompatibility)
-                        .setDefaultValue(true)
-                        .setSaveConsumer(newValue -> config.setMendingIncompatibility(newValue))
-                        .setTooltip(Text.of("unbreaking will be incompatible with mending\nif this is true. default = true"))
-                        .build()
+                    .startBooleanToggle(new TranslatableText("text.config.actuallyunbreaking.option.mendingIncompatibility"), config.mendingIncompatibility)
+                    .setDefaultValue(true)
+                    .setSaveConsumer(newValue -> config.setMendingIncompatibility(newValue))
+                    .setTooltip(Text.of("unbreaking will be incompatible with mending\nif this is true. default = true"))
+                    .build()
         );
 
+        general.addEntry(
+                configEntryBuilder
+                    .startBooleanToggle(new TranslatableText("text.config.actuallyunbreaking.option.editEnchantedLootGeneration"), config.editEnchantedLootGeneration)
+                    .setDefaultValue(true)
+                    .setSaveConsumer(newValue -> config.setEditEnchantedLootGeneration(newValue))
+                    .setTooltip(Text.of("enchanted loot will not generate with both\nmending and unbreaking if this is true. default = true"))
+                    .build()
+        );
         return builder.setTransparentBackground(isTransparent).build();
 
     }

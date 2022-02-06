@@ -6,6 +6,8 @@ public class AUConfig {
 
     public boolean mendingIncompatibility = true;
 
+    public boolean editEnchantedLootGeneration = true;
+
     public void setMaxLevelOnly(boolean maxLevelOnly) {
       this.maxLevelOnly = maxLevelOnly;
     }
@@ -14,4 +16,7 @@ public class AUConfig {
       this.mendingIncompatibility = mendingIncompatibility;
     }
 
+    public void setEditEnchantedLootGeneration(boolean editEnchantedLootGeneration) {
+        this.editEnchantedLootGeneration = editEnchantedLootGeneration;
+    }
 }
