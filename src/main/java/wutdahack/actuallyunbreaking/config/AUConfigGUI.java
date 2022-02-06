@@ -38,6 +38,15 @@ public class AUConfigGUI {
                         .build()
         );
 
+        general.addEntry(
+                configEntryBuilder
+                        .startBooleanToggle(new TranslatableText("text.config.actuallyunbreaking.option.editEnchantedLootGeneration"), config.editEnchantedLootGeneration)
+                        .setDefaultValue(true)
+                        .setSaveConsumer(newValue -> config.setEditEnchantedLootGeneration(newValue))
+                        .setTooltip(Text.of("enchanted loot will not generate with both\nmending and unbreaking if this is true. default = true"))
+                        .build()
+        );
+
         return builder.setTransparentBackground(isTransparent).build();
 
     }
