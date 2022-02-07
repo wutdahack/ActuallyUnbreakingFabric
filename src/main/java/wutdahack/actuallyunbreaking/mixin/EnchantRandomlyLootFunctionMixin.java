@@ -20,7 +20,7 @@ public abstract class EnchantRandomlyLootFunctionMixin {
     boolean isBook;
     ItemStack lootStack;
 
-    @ModifyVariable(method = "process", name = "list", at = @At(value = "STORE"))
+    @ModifyVariable(method = "process", ordinal = 0, at = @At(value = "STORE"))
     private List<Enchantment> filterMending(List<Enchantment> list) {
         list = Registry.ENCHANTMENT.stream().filter(Enchantment::isAvailableForRandomSelection).filter(enchantment -> isBook || enchantment.isAcceptableItem(lootStack)).filter(
                 enchantment -> {
@@ -37,7 +37,7 @@ public abstract class EnchantRandomlyLootFunctionMixin {
         return list;
     }
 
-    @ModifyVariable(method = "process", name = "bl", at = @At(value = "LOAD"))
+    @ModifyVariable(method = "process", ordinal = 0, at = @At(value = "LOAD"))
     private boolean setIsBook(boolean value) {
         return isBook = value;
     }
