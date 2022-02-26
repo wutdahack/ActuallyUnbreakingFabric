@@ -32,12 +32,20 @@ public abstract class UnbreakingEnchantmentMixin extends Enchantment {
         }
     }
 
+    @Inject(method = "isAcceptableItem", at = @At(value = "HEAD"), cancellable = true)
+    public void dontAcceptUnbreakableItems(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+        if (ActuallyUnbreaking.getInstance().config.useUnbreakableTag) {
+            cir.setReturnValue(stack.getTag() != null && !stack.getTag().getBoolean("Unbreakable")); // item is only acceptable if it doesn't have the unbreakable tag
+        }
+    }
 
     @Inject(method = "shouldPreventDamage", at = @At(value = "HEAD"), cancellable = true)
     private static void makeUnbreakable(ItemStack item, int level, Random random, CallbackInfoReturnable<Boolean> cir) {
-        if (ActuallyUnbreaking.getInstance().config.maxLevelOnly ? level >= Enchantments.UNBREAKING.getMaxLevel() : level > 0) {
-            item.setDamage(0);
-            cir.setReturnValue(true);
+        if (!ActuallyUnbreaking.getInstance().config.useUnbreakableTag) {
+            if (ActuallyUnbreaking.getInstance().config.maxLevelOnly ? level >= Enchantments.UNBREAKING.getMaxLevel() : level > 0) {
+                item.setDamage(0); // set item damage to 0 to remove the tool's durability bar
+                cir.setReturnValue(true);
+            }
         }
     }
 }

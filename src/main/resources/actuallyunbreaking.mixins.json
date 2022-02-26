@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "EnchantRandomlyLootFunctionMixin",
+    "ItemStackMixin",
+    "MendingEnchantmentMixin",
     "UnbreakingEnchantmentMixin"
   ],
   "injectors": {

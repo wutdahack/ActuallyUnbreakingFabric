@@ -8,6 +8,7 @@ public class AUConfig {
 
     public boolean editEnchantedLootGeneration = true;
 
+    public boolean useUnbreakableTag = true;
 
     public void setMaxLevelOnly(boolean maxLevelOnly) {
         this.maxLevelOnly = maxLevelOnly;
@@ -19,5 +20,9 @@ public class AUConfig {
 
     public void setEditEnchantedLootGeneration(boolean editEnchantedLootGeneration) {
         this.editEnchantedLootGeneration = editEnchantedLootGeneration;
+    }
+
+    public void setUseUnbreakableTag(boolean useUnbreakableTag) {
+        this.useUnbreakableTag = useUnbreakableTag;
     }
 }
