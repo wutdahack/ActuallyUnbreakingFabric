@@ -47,6 +47,14 @@ public class AUConfigGUI {
                         .build()
         );
 
+        general.addEntry(
+                configEntryBuilder
+                        .startBooleanToggle(new TranslatableText("text.config.actuallyunbreaking.option.useUnbreakableTag"), config.useUnbreakableTag)
+                        .setDefaultValue(true)
+                        .setSaveConsumer(newValue -> config.setUseUnbreakableTag(newValue))
+                        .setTooltip(Text.of("when the tool takes damage, the unbreakable\nnbt tag will be added and unbreaking (and mending) will be\nremoved from the tool (you will no longer be able\nto add unbreaking and mending to the tool) if this is true.\ndefault = true"))
+                        .build()
+        );
         return builder.setTransparentBackground(isTransparent).build();
 
     }
