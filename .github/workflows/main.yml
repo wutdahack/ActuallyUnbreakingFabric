@@ -1,31 +1,21 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
-
-# Controls when the workflow will run
+name: GitHub Actions
 on:
-  # Triggers the workflow on push or pull request events but only for the 1.18.1 branch
-  push:
-    branches: [ 1.18.1 ]
-  pull_request:
-    branches: [ 1.18.1 ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+    inputs:
+      mcVersion:
+        description: 'Minecraft Version'
+        required: true
+        default: '1.18.2'
+        type: string
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  update:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3.0.0
       - name: Fabric Update
         uses: JamCoreModding/FabricUpdateAction@1.0.3
         with:
-          # Minecraft version to update to
-          game-version: 1.18.2
+          game-version: ${{ inputs.mcVersion }}
