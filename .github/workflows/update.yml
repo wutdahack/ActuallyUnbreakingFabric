@@ -6,7 +6,7 @@ on:
         description: 'Minecraft Version'
         required: true
         default: '1.18.2'
-        type: string
+        type: ""
 jobs:
   update:
     runs-on: ubuntu-latest
