@@ -1,12 +1,6 @@
 name: update
 on:
   workflow_dispatch:
-    inputs:
-      mcVersion:
-        description: 'Minecraft Version'
-        required: true
-        default: '1.18.2'
-        type: ""
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -16,4 +10,4 @@ jobs:
       - name: Fabric Update
         uses: JamCoreModding/FabricUpdateAction@1.0.3
         with:
-          game-version: ${{ github.actions.inputs.mcVersion }}
+          game-version: 1.18.2
