@@ -16,4 +16,4 @@ jobs:
       - name: Fabric Update
         uses: JamCoreModding/FabricUpdateAction@1.0.3
         with:
-          game-version: ${{ inputs.mcVersion }}
+          game-version: ${{ github.actions.inputs.mcVersion }}
