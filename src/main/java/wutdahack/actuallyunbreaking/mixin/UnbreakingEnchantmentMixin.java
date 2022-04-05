@@ -1,5 +1,6 @@
 package wutdahack.actuallyunbreaking.mixin;
 
+import java.util.Random;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
@@ -13,8 +14,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import wutdahack.actuallyunbreaking.ActuallyUnbreaking;
 
-import java.util.Random;
-
 @Mixin(UnbreakingEnchantment.class)
 public abstract class UnbreakingEnchantmentMixin extends Enchantment {
 
@@ -25,7 +24,7 @@ public abstract class UnbreakingEnchantmentMixin extends Enchantment {
     // items can't have mending and unbreaking together if enabled in the config
     @Override
     protected boolean canAccept(Enchantment other) {
-        if (ActuallyUnbreaking.getInstance().config.mendingIncompatibility) {
+        if (ActuallyUnbreaking.instance.config.mendingIncompatibility) {
             return !(other instanceof MendingEnchantment) && super.canAccept(other);
         } else {
             return super.canAccept(other);
@@ -33,17 +32,25 @@ public abstract class UnbreakingEnchantmentMixin extends Enchantment {
     }
 
     @Inject(method = "isAcceptableItem", at = @At(value = "HEAD"), cancellable = true)
-    public void dontAcceptUnbreakableItems(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (ActuallyUnbreaking.getInstance().config.useUnbreakableTag) {
+    private void dontAcceptUnbreakableItems(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+        if (ActuallyUnbreaking.instance.config.useUnbreakableTag) {
             cir.setReturnValue(stack.getTag() != null && !stack.getTag().getBoolean("Unbreakable")); // item is only acceptable if it doesn't have the unbreakable tag
         }
     }
 
     @Inject(method = "shouldPreventDamage", at = @At(value = "HEAD"), cancellable = true)
     private static void makeUnbreakable(ItemStack item, int level, Random random, CallbackInfoReturnable<Boolean> cir) {
-        if (!ActuallyUnbreaking.getInstance().config.useUnbreakableTag) {
-            if (ActuallyUnbreaking.getInstance().config.maxLevelOnly ? level >= Enchantments.UNBREAKING.getMaxLevel() : level > 0) {
+        if (!ActuallyUnbreaking.instance.config.useUnbreakableTag) {
+            if (ActuallyUnbreaking.instance.config.useUnbreakableAtLevel && level >= ActuallyUnbreaking.instance.config.unbreakableAtLevel) {
                 item.setDamage(0); // set item damage to 0 to remove the tool's durability bar
+                cir.setReturnValue(true);
+            }
+            else if (ActuallyUnbreaking.instance.config.maxLevelOnly && level >= Enchantments.UNBREAKING.getMaxLevel()) {
+                item.setDamage(0);
+                cir.setReturnValue(true);
+            }
+            else if (level > 0) {
+                item.setDamage(0);
                 cir.setReturnValue(true);
             }
         }
