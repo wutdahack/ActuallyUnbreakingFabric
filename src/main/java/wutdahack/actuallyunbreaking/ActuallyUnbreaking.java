@@ -17,11 +17,7 @@ public class ActuallyUnbreaking implements ModInitializer {
 
     public static Logger LOGGER = LogManager.getFormatterLogger("actuallyunbreaking");
     public AUConfig config;
-    private static ActuallyUnbreaking instance;
-
-    public static ActuallyUnbreaking getInstance() {
-        return instance;
-    }
+    public static ActuallyUnbreaking instance;
 
     @Override
     public void onInitialize() {

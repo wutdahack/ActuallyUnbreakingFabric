@@ -17,23 +17,23 @@ import java.util.stream.Collectors;
 @Mixin(EnchantRandomlyLootFunction.class)
 public abstract class EnchantRandomlyLootFunctionMixin {
 
-    boolean isBook;
-    ItemStack lootStack;
+    private boolean isBook;
+    private ItemStack lootStack;
 
     @ModifyVariable(method = "process", ordinal = 0, at = @At(value = "STORE"))
     private List<Enchantment> filterMending(List<Enchantment> list) {
-        list = Registry.ENCHANTMENT.stream().filter(Enchantment::isAvailableForRandomSelection).filter(enchantment -> isBook || enchantment.isAcceptableItem(lootStack)).filter(
-                enchantment -> {
-                    if (ActuallyUnbreaking.getInstance().config.editEnchantedLootGeneration) {
-                        if (EnchantmentHelper.getLevel(Enchantments.UNBREAKING, lootStack) > 0) {
-                            return enchantment != Enchantments.MENDING;
-                        } else if (EnchantmentHelper.getLevel(Enchantments.MENDING, lootStack) > 0) {
-                            return enchantment != Enchantments.UNBREAKING;
+         list = Registry.ENCHANTMENT.stream().filter(Enchantment::isAvailableForRandomSelection).filter(enchantment -> isBook || enchantment.isAcceptableItem(lootStack)).filter(
+                    enchantment -> {
+                        if (ActuallyUnbreaking.instance.config.editEnchantedLootGeneration) {
+                            if (EnchantmentHelper.getLevel(Enchantments.UNBREAKING, lootStack) > 0) {
+                                return enchantment != Enchantments.MENDING;
+                            } else if (EnchantmentHelper.getLevel(Enchantments.MENDING, lootStack) > 0) {
+                                return enchantment != Enchantments.UNBREAKING;
+                            }
                         }
-                    }
                     return true;
-                }
-        ).collect(Collectors.toList());
+                    }
+                ).collect(Collectors.toList());
         return list;
     }
 

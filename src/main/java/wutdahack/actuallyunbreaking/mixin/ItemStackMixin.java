@@ -19,33 +19,46 @@ import java.util.stream.Collectors;
 public abstract class ItemStackMixin {
 
     @Inject(method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "HEAD"))
-    public void makeUnbreakable(int amount, Random random, ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
+    private void makeUnbreakable(int amount, Random random, ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
 
-        int unbreakingLevel = EnchantmentHelper.getLevel(Enchantments.UNBREAKING, (ItemStack) (Object) this); // get unbreaking level
-        int mendingLevel = EnchantmentHelper.getLevel(Enchantments.MENDING, (ItemStack) (Object) this); // get mending level
+        if (ActuallyUnbreaking.instance.config.useUnbreakableTag) {
 
-        if (ActuallyUnbreaking.getInstance().config.useUnbreakableTag) {
+            int unbreakingLevel = EnchantmentHelper.getLevel(Enchantments.UNBREAKING, (ItemStack) (Object) this); // get unbreaking level
 
-            if (ActuallyUnbreaking.getInstance().config.maxLevelOnly ? unbreakingLevel >= Enchantments.UNBREAKING.getMaxLevel() : unbreakingLevel > 0) { // if tool has unbreaking
-
-                ((ItemStack) (Object) this).getOrCreateNbt().putBoolean("Unbreakable", true); // add the unbreakable tag
-                ((ItemStack) (Object) this).setDamage(0); // set item damage to 0 to remove the tool's durability bar
-
-                Map<Enchantment, Integer> enchantmentMap = EnchantmentHelper.get((ItemStack) (Object) this).entrySet().stream()
-                        .filter(entry -> entry.getKey() != Enchantments.UNBREAKING) // remove unbreaking from the map
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-                if (mendingLevel > 0) { // if tool has mending
-                    enchantmentMap = enchantmentMap.entrySet().stream()
-                            .filter(entry -> entry.getKey() != Enchantments.MENDING) // remove mending from the map
-                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+            if (ActuallyUnbreaking.instance.config.useUnbreakableAtLevel) { // if tool has unbreaking
+                if (unbreakingLevel >= ActuallyUnbreaking.instance.config.unbreakableAtLevel) {
+                    addUnbreakableTag((ItemStack) (Object) this);
                 }
-
-                EnchantmentHelper.set(
-                        enchantmentMap,
-                        (ItemStack) (Object) this
-                ); // use the enchantment map on the tool
+            } else if (ActuallyUnbreaking.instance.config.maxLevelOnly) {
+                if (unbreakingLevel >= Enchantments.UNBREAKING.getMaxLevel()) {
+                    addUnbreakableTag((ItemStack) (Object) this);
+                }
+            } else if (unbreakingLevel > 0) {
+                addUnbreakableTag((ItemStack)(Object) this);
             }
         }
+    }
+
+    private void addUnbreakableTag(ItemStack item) {
+
+        int mendingLevel = EnchantmentHelper.getLevel(Enchantments.MENDING, (ItemStack) (Object) this); // get mending level
+
+        item.getOrCreateNbt().putBoolean("Unbreakable", true); // add the unbreakable tag
+        item.setDamage(0); // set item damage to 0 to remove the tool's durability bar
+
+        Map<Enchantment, Integer> enchantmentMap = EnchantmentHelper.get(item).entrySet().stream()
+                .filter(entry -> entry.getKey() != Enchantments.UNBREAKING) // remove unbreaking from the map
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        if (mendingLevel > 0) { // if tool has mending
+            enchantmentMap = enchantmentMap.entrySet().stream()
+                    .filter(entry -> entry.getKey() != Enchantments.MENDING) // remove mending from the map
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                }
+
+        EnchantmentHelper.set(
+                enchantmentMap,
+                item
+        ); // use the enchantment map on the tool
     }
 }
