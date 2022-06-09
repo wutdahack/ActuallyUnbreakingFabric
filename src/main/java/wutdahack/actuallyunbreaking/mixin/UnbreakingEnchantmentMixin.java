@@ -1,6 +1,6 @@
 package wutdahack.actuallyunbreaking.mixin;
 
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
