@@ -49,7 +49,7 @@ public abstract class UnbreakingEnchantmentMixin extends Enchantment {
                 item.setDamage(0);
                 cir.setReturnValue(true);
             }
-            else if (level > 0) {
+            else if (!(ActuallyUnbreaking.instance.config.maxLevelOnly || ActuallyUnbreaking.instance.config.useUnbreakableAtLevel) && level > 0) {
                 item.setDamage(0);
                 cir.setReturnValue(true);
             }
