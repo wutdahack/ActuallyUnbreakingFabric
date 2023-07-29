@@ -9,7 +9,7 @@
 
   "text.config.actuallyunbreaking.comment.maxLevelOnly": "only the last level of unbreaking will set the tool\nto be unbreakable if this is true.",
   "text.config.actuallyunbreaking.comment.useUnbreakableAtLevel": "if this is true, the tool will only be\nunbreakable at a specified level\n(overrides max level option).",
-  "text.config.actuallyunbreaking.comment.unbreakableAtLevel": "if this is true, the tool will only be\nunbreakable at a specified level\n(overrides max level option).",
+  "text.config.actuallyunbreaking.comment.unbreakableAtLevel": "the specified level the tool will be unbreakable at.",
   "text.config.actuallyunbreaking.comment.mendingIncompatibility": "unbreaking will be incompatible with mending\nif this is true.",
   "text.config.actuallyunbreaking.comment.useUnbreakableTag": "when the tool takes damage, the unbreakable\nnbt tag will be added and unbreaking (and mending) will be\nremoved from the tool (you will no longer be able\nto add unbreaking and mending to the tool) if this is true."
 }
