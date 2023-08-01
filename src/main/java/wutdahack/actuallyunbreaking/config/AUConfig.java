@@ -10,7 +10,5 @@ public class AUConfig {
 
     public boolean mendingIncompatibility = true;
 
-    public boolean editEnchantedLootGeneration = true;
-
     public boolean useUnbreakableTag = true;
 }
