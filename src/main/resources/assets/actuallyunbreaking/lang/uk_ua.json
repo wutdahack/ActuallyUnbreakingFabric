@@ -4,12 +4,16 @@
   "text.config.actuallyunbreaking.option.maxLevelOnly": "лише максимальний рівень",
   "text.config.actuallyunbreaking.option.useUnbreakableAtLevel": "використовуйте непорушний на рівні номер",
   "text.config.actuallyunbreaking.option.unbreakableAtLevel": "непорушний на рівні",
+  "text.config.actuallyunbreaking.option.useOnlyUnbreakableAtLevel": "зробити інструмент незламним лише на одному вказаному рівні",
+  "text.config.actuallyunbreaking.option.onlyUnbreakableAtLevel": "єдиний рівень, який робить інструмент незламним",
   "text.config.actuallyunbreaking.option.mendingIncompatibility": "несумісний з ремонтом",
   "text.config.actuallyunbreaking.option.useUnbreakableTag": "використовуйте незламний тег",
 
   "text.config.actuallyunbreaking.comment.maxLevelOnly": "лише останній рівень непорушності встановить інструмент/nяк непорушний, якщо це правда.",
   "text.config.actuallyunbreaking.comment.useUnbreakableAtLevel": "якщо це правда, інструмент буде\nнезламним лише на визначеному рівні\n(перевизначає параметр максимального рівня).",
   "text.config.actuallyunbreaking.comment.unbreakableAtLevel": "якщо це правда, інструмент буде\nнезламним лише на визначеному рівні\n(перевизначає параметр максимального рівня).",
+  "text.config.actuallyunbreaking.comment.useOnlyUnbreakableAtLevel": "якщо це так, то це робить інструмент\nнезнищуваним лише на вказаному рівні.\n(перевизначає максимальний рівень та\nнезламність при заданих параметрах)",
+  "text.config.actuallyunbreaking.comment.onlyUnbreakableAtLevel": "якщо це правда, інструмент буде\nнезламним лише на визначеному рівні\n(перевизначає параметр максимального рівня).",
   "text.config.actuallyunbreaking.comment.mendingIncompatibility": "непорушний буде несумісним із ремонтом\nякщо це правда.",
   "text.config.actuallyunbreaking.comment.useUnbreakableTag": "коли інструмент отримує пошкодження, тег непорушний\nnbt буде додано, а непорушний (і ремонт) буде\nвидалено з інструменту (ви більше не зможете\nдодати непорушний і ремонт до інструменту), якщо це правда."
 }
