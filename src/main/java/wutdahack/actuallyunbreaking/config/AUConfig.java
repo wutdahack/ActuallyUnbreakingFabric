@@ -8,6 +8,10 @@ public class AUConfig {
 
     public int unbreakableAtLevel = 3;
 
+    public boolean useOnlyUnbreakableAtLevel = false;
+
+    public int onlyUnbreakableAtLevel = 3;
+
     public boolean mendingIncompatibility = true;
 
     public boolean useUnbreakableTag = true;
