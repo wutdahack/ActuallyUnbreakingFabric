@@ -41,8 +41,12 @@ public abstract class DigDurabilityEnchantmentMixin extends Enchantment {
     @Inject(method = "shouldIgnoreDurabilityDrop", at = @At(value = "HEAD"), cancellable = true)
     private static void makeUnbreakable(ItemStack item, int level, Random random, CallbackInfoReturnable<Boolean> cir) {
         if (!ActuallyUnbreaking.instance.config.useUnbreakableTag) {
-            if (ActuallyUnbreaking.instance.config.useUnbreakableAtLevel && level >= ActuallyUnbreaking.instance.config.unbreakableAtLevel) {
+            if (ActuallyUnbreaking.instance.config.useOnlyUnbreakableAtLevel && level == ActuallyUnbreaking.instance.config.onlyUnbreakableAtLevel) {
                 item.setDamageValue(0); // set item damage to 0 to remove the tool's durability bar
+                cir.setReturnValue(true);
+            }
+            else if (ActuallyUnbreaking.instance.config.useUnbreakableAtLevel && level >= ActuallyUnbreaking.instance.config.unbreakableAtLevel) {
+                item.setDamageValue(0);
                 cir.setReturnValue(true);
             }
             else if (ActuallyUnbreaking.instance.config.maxLevelOnly && level >= Enchantments.UNBREAKING.getMaxLevel()) {
