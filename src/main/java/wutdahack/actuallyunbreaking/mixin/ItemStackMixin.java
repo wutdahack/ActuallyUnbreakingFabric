@@ -1,11 +1,14 @@
 package wutdahack.actuallyunbreaking.mixin;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -26,7 +29,11 @@ public abstract class ItemStackMixin {
 
             int unbreakingLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, (ItemStack) (Object) this);
 
-            if (ActuallyUnbreaking.instance.config.useUnbreakableAtLevel) {
+            if (ActuallyUnbreaking.instance.config.useOnlyUnbreakableAtLevel) {
+                if (unbreakingLevel == ActuallyUnbreaking.instance.config.onlyUnbreakableAtLevel) {
+                    actuallyUnbreaking$addUnbreakableTag((ItemStack) (Object) this);
+                }
+            } else if (ActuallyUnbreaking.instance.config.useUnbreakableAtLevel) {
                 if (unbreakingLevel >= ActuallyUnbreaking.instance.config.unbreakableAtLevel) {
                     actuallyUnbreaking$addUnbreakableTag((ItemStack) (Object) this);
                 }
